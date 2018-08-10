@@ -1,2 +1,3 @@
 # webstats_docker
-Dockerized version of webstats
+
+This is the dockerized version of [webstats repository](https://github.com/xaratustrah/webstats).
