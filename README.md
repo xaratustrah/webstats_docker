@@ -3,13 +3,15 @@
 This is the dockerized version of [webstats repository](https://github.com/xaratustrah/webstats).
 
 #### Notes
-`webstats` needs to run system commands on the computer with the GPU hardware. This is in contrast to the concept of the docker containers, since there it is desired to have complete  isolation between the host and container. If you really need to run commands on the host from inside a container, then something must be changed in your overall architecture, as this is really not the way things should be designed.
+It is usually desired to have complete isolation between the host and container(s). If you feel the need to run commands on the host from inside a container, then something must be changed in your overall architecture, as this is really not the way things should be designed.
 
-But in a small application, like a weather station running on a raspberry pi, you may still be interested in doing this. The most secure way is of course to connect to the host from the container using `ssh`. As you can see in the `Dockerfile` this can be accomplished by using a key authorization. The user name is given via environment variable at the deploy time.
+Still deploying docker applications is very attractive as everything is easily configured and you might still want to enjoy docker even for small applications that have strong bonds to the host machine, like a physical hardware connected to it, say for a weather station or a robot. Also `webstats` needs to run system commands on the computer with the GPU hardware and its drivers.
 
-The ssh connection in the script:
+The most secure way of accomplishing this is of course to connect to the host from the container using `ssh`. As you can see in the `Dockerfile` this can be done by using a key authorization. The user name is given via environment variable at the deploy time.
 
-    ssh -o LogLevel=QUIET -o StrictHostKeyChecking=no -tt -l $DOCKERHOST_USER $DOCKERHOST
+The ssh terminal connection needs to keep quiet since otherwise the resulting output can not be parsed in the web application:
+
+    ssh -o LogLevel=QUIET -o StrictHostKeyChecking=no -tt -l $DOCKERHOST_USER $DOCKERHOST COMMANDS
 
 prevents SSH from printing errors like:
 
