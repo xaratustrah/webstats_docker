@@ -7,9 +7,10 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    build: ./webstats
     networks:
       - my_cool_net
+    environment:
+      - DOCKERHOST_USER=${DOCKERHOST_USER}
 
   nginx:
     image: webstats_docker_nginx:latest

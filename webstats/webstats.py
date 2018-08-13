@@ -14,13 +14,14 @@ import re
 from flask import Flask
 from jinja2 import Template
 
+CMD_PREFIX = ''
 CMD = [
-    'uname -n',
-    'uname -mrsv',
-    'date',
-    'sar -r 1 1',
-    'nvidia-smi --query-gpu=gpu_uuid,memory.total,memory.used,memory.free,temperature.gpu,utilization.gpu,utilization.memory --format=csv',
-    'sar -P ALL 1 1',
+    CMD_PREFIX + 'uname -n',
+    CMD_PREFIX + 'uname -mrsv',
+    CMD_PREFIX + 'date',
+    CMD_PREFIX + 'sar -r 1 1',
+    CMD_PREFIX + 'nvidia-smi --query-gpu=gpu_uuid,memory.total,memory.used,memory.free,temperature.gpu,utilization.gpu,utilization.memory --format=csv',
+    CMD_PREFIX + 'sar -P ALL 1 1',
 ]
 
 HTML_TMPL = """

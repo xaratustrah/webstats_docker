@@ -12,6 +12,10 @@ WORKDIR /home/flask/app/webstats
 # re-install all python packages defined in requirements.txt
 # whenever any source code change is made)
 
+# Installing dependencies
+
+RUN apt-get update && apt-get -y install ssh
+
 COPY requirements.txt /home/flask/app/webstats
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -22,6 +26,9 @@ COPY . /home/flask/app/webstats
 RUN chown -R flask:flaskgroup /home/flask
 
 USER flask
+
+# Create a public key
+RUN ssh-keygen -t rsa -N "" -f /home/flask/.ssh/id_rsa
 
 WORKDIR /home/flask/app/webstats
 
