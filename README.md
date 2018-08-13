@@ -7,6 +7,19 @@ This is the dockerized version of [webstats repository](https://github.com/xarat
 
 But in a small application, like a weather station running on a raspberry pi, you may still be interested in doing this. The most secure way is of course to connect to the host from the container using `ssh`. As you can see in the `Dockerfile` this can be accomplished by using a key authorization. The user name is given via environment variable at the deploy time.
 
+The ssh connection in the script:
+
+    ssh -o LogLevel=QUIET -o StrictHostKeyChecking=no -tt -l $DOCKERHOST_USER $DOCKERHOST
+
+prevents SSH from printing errors like:
+
+    Pseudo-terminal will not be allocated because stdin is not a terminal.
+
+and
+
+    connection to x.y.z closed.
+
+and also asking if you are sure to connect to a new host when ran for the first time.
 
 #### Starting
 

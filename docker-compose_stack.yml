@@ -11,6 +11,7 @@ services:
       - my_cool_net
     environment:
       - DOCKERHOST_USER=${DOCKERHOST_USER}
+      - DOCKERHOST=${DOCKERHOST}
 
   nginx:
     image: webstats_docker_nginx:latest
